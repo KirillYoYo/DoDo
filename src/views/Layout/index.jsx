@@ -39,12 +39,7 @@ class App extends React.Component {
 					<Content style={{margin: '0 16px'}}>
 						<div style={{minHeight: 360}}>
 							<Redirect to="/addTransaction"/>
-							{
-								childRoutes.map((route, index) => (
-								<Route key={index} path={route.path} component={authHOC(route.component)}
-								       exactly={route.exactly}/>
-								))
-							}
+							{this.props.children}
 						</div>
 					</Content>
 				</Layout>

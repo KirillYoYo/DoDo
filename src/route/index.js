@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 
 import Layout from '../views/Layout';
 import Login from '../views/Login';
@@ -27,7 +27,10 @@ const routes = (
 	<Switch>
 		<Route path="/login" component={Login}/>
 		<Route path="/register" component={Register}/>
-		<Route path="/" component={Layout}/>
+		<Layout>
+			<Route path="/table" component={Table}/>
+			<Route path="/addTransaction" component={AddTransaction}/>
+		</Layout>
 	</Switch>
 );
 
