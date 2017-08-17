@@ -24,20 +24,36 @@ class TableTransactions extends React.Component {
 		this.state = {
 			tableData: [],
 		}
+		this.onUnload = this.onUnload.bind(this);
 	}
 
 	componentDidMount () {
 		if (this.props.transactions.transactions.length === 0) {
-			api.get('/table').then(
-				result => {
-					this.props.updateAllTransactions(result.data.table.concat(this.props.transactions.transactions))
-				},
-				error => {
-					console.log(error)
-				}
-			)
+			if (localStorage.getItem('table') && JSON.parse(localStorage.getItem('table')).length !== 0 ) {
+				this.props.updateAllTransactions(JSON.parse(localStorage.getItem('table')))
+			} else {
+				api.get('/table').then(
+					result => {
+						this.props.updateAllTransactions(result.data.table.concat(this.props.transactions.transactions))
+					},
+					error => {
+						console.log(error)
+					}
+				)
+			}
+
 		}
+		window.onunload = this.onUnload;
+
 	}
+
+	componentWillUnmount() {
+		window.removeEventListener("onunload", this.onUnload)
+	}
+
+	onUnload = function() {
+		localStorage.setItem('table', JSON.stringify(this.props.transactions.transactions));
+	};
 
 	deleteTransition(id) {
 		this.props.removeTransaction(id)

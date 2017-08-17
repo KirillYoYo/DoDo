@@ -55,24 +55,6 @@ class AddTransaction extends React.Component {
 
 	componentDidMount() {
 		this.props.getAllBanks()
-		// if (this.state.banks.length === 0) {
-		// 	this.setState({
-		// 		...this.state,
-		// 		loadingBanks: true,
-		// 	})
-		// 	api.get('/banks').then(
-		// 		result => {
-		// 			this.setState({
-		// 				...this.state,
-		// 				banks: result.data.banks,
-		// 				loadingBanks: false,
-		// 			})
-		// 		},
-		// 		error => {
-		// 			console.log(error)
-		// 		}
-		// 	)
-		// }
 	}
 
 	handleSubmit (e) {
