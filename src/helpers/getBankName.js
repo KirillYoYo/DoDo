@@ -1,12 +1,13 @@
 export default function getBankName (num) {
+	num = parseInt(num);
 	switch (num) {
-		case 0:
+		case 100:
 			return 'Банк Газпром'
-		case 1:
+		case 101:
 			return 'Первый межнациональнйы банк'
-		case 2:
+		case 102:
 			return 'Банк UEFA'
-		case 3:
+		case 103:
 			return 'Национальный банк резерва'
 	}
 }
