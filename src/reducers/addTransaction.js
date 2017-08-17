@@ -33,6 +33,13 @@ export default function auth(state = initialState, action = {}) {
 				...state,
 				transactions: new_items
 			};
+
+		case UPDATE:
+			return {
+				...state,
+				transactions: action.payload.data
+			};
+
 		default:
 			return state;
 	}

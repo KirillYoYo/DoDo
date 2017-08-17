@@ -28,20 +28,9 @@ class TableTransactions extends React.Component {
 	
 	componentDidMount () {
 		if (this.props.transactions.transactions.length === 0) {
-			// this.setState({
-			// 	...this.state,
-			// 	loadingBanks: true,
-			// })
 			api.get('/table').then(
 				result => {
-					// this.setState({
-					// 	...this.state,
-					// 	tableData: result.data.table.concat(this.props.transactions.transactions),
-					// });
-					result.data.table.map((item, i) => {
-						console.log(item)
-						this.props.addTransaction(item)
-					})
+					this.props.updateAllTransactions(result.data.table.concat(this.props.transactions.transactions))
 				},
 				error => {
 					console.log(error)
@@ -57,22 +46,22 @@ class TableTransactions extends React.Component {
 
 	render() {
 		const columns = [{
-			title: 'id',
+			title: 'Id',
 			dataIndex: 'id',
 			key: 'id',
-			render: (text, record) => (
-				<span>
-					{ record.idTransaction}
-			    </span>
-			),
 		}, {
 			title: 'Счет',
-			dataIndex: 'amount',
 			key: 'amount',
+			dataIndex: 'amount',
 		}, {
 			title: 'Банк',
-			dataIndex: 'bankId',
 			key: 'bankId',
+			dataIndex: 'bankId',
+			render: (text, record) => (
+				<span>
+					{getBankName(record.bankId)}
+			    </span>
+			),
 		}, {
 			title: 'Action',
 			key: 'action',
@@ -83,10 +72,20 @@ class TableTransactions extends React.Component {
 			),
 		}];
 
+		const dataSource = [];
+		this.props.transactions.transactions.map((item, i) => {
+			dataSource.push(item)
+			dataSource[i].key = '' + i
+		});
+
 		return (
 			<div className="table-page">
 				<h1>Table</h1>
-				<Table dataSource={this.props.transactions.transactions} columns={columns} locale={{emptyText: 'No Data'}} />
+				{
+					this.props.transactions.transactions.length !== 0 ?
+						<Table dataSource={dataSource} columns={columns} locale={{emptyText: 'No Data'}} />
+					: null
+				}
 			</div>
 		)
 	}
@@ -105,6 +104,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		addTransaction: bindActionCreators(addTransaction, dispatch),
 		removeTransaction: bindActionCreators(removeTransaction, dispatch),
+		updateAllTransactions: bindActionCreators(updateAllTransactions, dispatch),
 	};
 };
 

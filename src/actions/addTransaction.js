@@ -18,11 +18,11 @@ export function removeTransaction(transactionId) {
 		}
 	}
 }
-export function updateAllTransactions(arr) {
+export function updateAllTransactions(data) {
 	return {
 		type: UPDATE,
 		payload: {
-			arr
+			data
 		}
 	}
 }
