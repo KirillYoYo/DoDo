@@ -25,7 +25,7 @@ class TableTransactions extends React.Component {
 			tableData: [],
 		}
 	}
-	
+
 	componentDidMount () {
 		if (this.props.transactions.transactions.length === 0) {
 			api.get('/table').then(
@@ -47,8 +47,8 @@ class TableTransactions extends React.Component {
 	render() {
 		const columns = [{
 			title: 'Id',
-			dataIndex: 'id',
-			key: 'id',
+			dataIndex: 'idTransaction',
+			key: 'idTransaction',
 		}, {
 			title: 'Счет',
 			key: 'amount',
