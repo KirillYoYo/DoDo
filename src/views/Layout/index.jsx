@@ -32,7 +32,6 @@ class App extends React.Component {
 		actions.fetchProfile();
 	}
 	componentDidMount() {
-		console.log(this.props.auth)
 		if (!localStorage.getItem('uid')) {
 			this.props.history.replace('/login');
 		}
