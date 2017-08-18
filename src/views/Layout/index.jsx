@@ -6,6 +6,7 @@ import {Layout, Affix, Row, Col} from 'antd';
 import {Route, Redirect} from 'react-router-dom';
 import AddTransaction from '../AddTransaction';
 import Table from '../Table';
+import {withRouter} from 'react-router-dom';
 
 
 import {childRoutes} from '@/route'
@@ -29,6 +30,12 @@ class App extends React.Component {
 	componentWillMount() {
 		const {actions} = this.props;
 		actions.fetchProfile();
+	}
+	componentDidMount() {
+		console.log(this.props.auth)
+		if (!localStorage.getItem('uid')) {
+			this.props.history.replace('/login');
+		}
 	}
 
 	render() {
@@ -71,4 +78,4 @@ function mapDispatchToProps(dispatch) {
 	return {actions: bindActionCreators({fetchProfile, logout}, dispatch)};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
