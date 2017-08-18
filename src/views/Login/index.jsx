@@ -39,8 +39,7 @@ class Login extends React.Component {
 			}
 			if (!res.error && res.payload.data) {
 				message.success('Welcome ' + res.payload.data.name);
-				this.props.history.replace('/addTransaction');
-				withRouter.history.replace('/addTransaction');
+				this.props.history.replace('/main');
 			}
 		}).catch(err => {
 			this.setState({

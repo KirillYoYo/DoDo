@@ -27,10 +27,7 @@ const routes = (
 	<Switch>
 		<Route path="/login" component={Login}/>
 		<Route path="/register" component={Register}/>
-		<Layout>
-			<Route path="/table" component={Table}/>
-			<Route path="/addTransaction" component={AddTransaction}/>
-		</Layout>
+		<Route path="/main" component={Layout}/>
 	</Switch>
 );
 

@@ -4,6 +4,9 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Layout, Affix, Row, Col} from 'antd';
 import {Route, Redirect} from 'react-router-dom';
+import AddTransaction from '../AddTransaction';
+import Table from '../Table';
+
 
 import {childRoutes} from '@/route'
 import authHOC from '@/utils/auth'
@@ -38,8 +41,11 @@ class App extends React.Component {
 					<Header profile={auth} logout={actions.logout}/>
 					<Content style={{margin: '0 16px'}}>
 						<div style={{minHeight: 360}}>
-							<Redirect to="/addTransaction"/>
-							{this.props.children}
+							<Route path="/main" render={() => (
+								<h3>main</h3>
+							)}/>
+							<Route path="/main/table" component={Table}/>
+							<Route path="/main/addTransaction" component={AddTransaction}/>
 						</div>
 					</Content>
 				</Layout>
