@@ -7,7 +7,6 @@ import {connect} from 'react-redux'
 import {addTransaction, removeTransaction, updateAllTransactions} from '../../actions/addTransaction';
 const FormItem = Form.Item;
 import './index.sass'
-import getBankName from '../../helpers/getBankName'
 
 const Option = Select.Option;
 
@@ -75,7 +74,7 @@ class TableTransactions extends React.Component {
 			dataIndex: 'bankId',
 			render: (text, record) => (
 				<span>
-					{getBankName(record.bankId)}
+					{record.name}
 			    </span>
 			),
 		}, {

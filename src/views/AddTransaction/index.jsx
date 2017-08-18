@@ -8,7 +8,6 @@ import {addTransaction} from '../../actions/addTransaction';
 import {getAllBanks} from '../../actions/banks';
 const FormItem = Form.Item;
 import './index.sass'
-import getBankName from '../../helpers/getBankName'
 
 const Option = Select.Option;
 
@@ -111,7 +110,7 @@ class AddTransaction extends React.Component {
 													const Option = Select.Option;
 													return (
 														<Option value={String(item.bankId)} key={i}>
-															{getBankName(item.bankId)}
+															{item.name}
 														</Option>
 													)
 												})
