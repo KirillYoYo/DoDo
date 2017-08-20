@@ -24,28 +24,35 @@ class Login extends React.Component {
 		}
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.user !== this.props.user) {
+			if (nextProps.user) {
+				localStorage.setItem('uid', nextProps.user.uid);
+				this.props.history.replace('/main');
+			}
+		}
+	}
+
+	componentWillMount () {
+		if (localStorage.getItem('uid')) {
+			this.props.history.replace('/main');
+		}
+	}
+
+	shouldComponentUpdate  () {
+		return !localStorage.getItem('uid')
+	}
+
 	handleSubmit(e) {
 		e.preventDefault();
 		this.setState({
 			loading: true
 		});
 		const data = this.props.form.getFieldsValue()
-		this.props.login(data.user, data.password).payload.promise.then(res => {
-			this.setState({
-				loading: false
-			});
-			if (res.error) {
-				message.error(res.payload.response.data.message);
-			}
-			if (!res.error && res.payload.data) {
-				message.success('Welcome ' + res.payload.data.name);
-				this.props.history.replace('/main');
-			}
-		}).catch(err => {
-			this.setState({
-				loading: false
-			});
-		})
+		this.props.login(data.user, data.password)
+		this.setState({
+			loading: false
+		});
 	}
 
 	toRegister() {
@@ -97,6 +104,7 @@ function mapStateToProps(state) {
 	}
 
 	return {user: null, loggingIn: auth.loggingIn, loginErrors: auth.loginErrors};
+
 }
 
 function mapDispatchToProps(dispatch) {

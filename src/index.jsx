@@ -3,15 +3,14 @@ import {render} from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
 import {LocaleProvider} from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
-import {
-	BrowserRouter
-} from 'react-router-dom'
-
+import {BrowserRouter} from 'react-router-dom'
 import configureStore from './store/configureStore';
+import rootSaga from './sagas/sagas'
 
 import Root from './containers/Root';
 
 const store = configureStore();
+store.runSaga(rootSaga)
 
 render(
 	<LocaleProvider locale={enUS}>

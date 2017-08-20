@@ -10,13 +10,11 @@ import {withRouter} from 'react-router-dom';
 
 
 import {childRoutes} from '@/route'
-import authHOC from '@/utils/auth'
 
-import NavPath from '@/components/NavPath'
 import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
-import Footer from '@/components/Footer'
-import {fetchProfile, logout} from '@/actions/auth';
+
+import {logout} from '../../actions/auth';
 
 import './index.sass';
 
@@ -28,17 +26,26 @@ class App extends React.Component {
 	}
 
 	componentWillMount() {
-		const {actions} = this.props;
-		actions.fetchProfile();
-	}
-	componentDidMount() {
 		if (!localStorage.getItem('uid')) {
 			this.props.history.replace('/login');
 		}
 	}
 
+	shouldComponentUpdate  () {
+		return !localStorage.getItem('uid')
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (this.props.auth !== nextProps.auth) {
+			if (!nextProps.auth.user) {
+				localStorage.removeItem('uid');
+				this.props.history.replace('/login');
+			}
+		}
+	}
+
 	render() {
-		const {auth, navpath, actions} = this.props;
+		const {auth, actions} = this.props;
 
 		return (
 			<Layout className="ant-layout-has-sider">
@@ -74,7 +81,7 @@ const mapStateToProps = (state) => {
 };
 
 function mapDispatchToProps(dispatch) {
-	return {actions: bindActionCreators({fetchProfile, logout}, dispatch)};
+	return {actions: bindActionCreators({ logout}, dispatch)};
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

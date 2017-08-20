@@ -1,7 +1,7 @@
 import {
 	LOGIN_PENDING,
 	LOGIN_SUCCESS,
-	LOGIN_ERROR,
+	LOGIN_FAILED,
 	LOGOUT_SUCCESS,
 	FETCH_PROFILE_PENDING,
 	FETCH_PROFILE_SUCCESS
@@ -20,9 +20,8 @@ export default function auth(state = initialState, action = {}) {
 			return Object.assign({}, initialState, {loggingIn: true});
 		case LOGIN_SUCCESS:
 			let user = action.payload.data;
-			localStorage.setItem('uid', user.uid);
 			return Object.assign({}, state, {user: user, loggingIn: false, loginErrors: null});
-		case LOGIN_ERROR:
+		case LOGIN_FAILED:
 			return {
 				...state,
 				loggingIn: false,
@@ -30,7 +29,6 @@ export default function auth(state = initialState, action = {}) {
 				loginErrors: action.payload.response.data.message
 			};
 		case LOGOUT_SUCCESS:
-			window.localStorage.removeItem('uid');
 			return {
 				...state,
 				loggingOut: false,

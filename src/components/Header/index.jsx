@@ -1,6 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import {Layout, Row, Col, Icon, Badge, Menu, Dropdown, Avatar, Popover} from 'antd'
+import {Layout, Row, Col} from 'antd'
 import './index.less'
 import {Link, withRouter} from 'react-router-dom'
 
@@ -11,22 +10,19 @@ class commonHeader extends React.Component {
 		super()
 	}
 
-	handleLogOut = () => {
-		const {logout} = this.props
-		logout().payload.promise.then(() => {
-			this.props.history.replace('/login');
-		});
+	handleLogOut  () {
+		const {logout} = this.props;
+		logout()
 	}
 
 	render() {
-		const {profile} = this.props
 
 		return (
 			<Header style={{background: '#fff', padding: 0}}>
 				<Row type="flex" justify="end" align="middle">
 
 					<Col span={3}>
-						<a onClick={this.handleLogOut}>Выйти</a>
+						<a onClick={this.handleLogOut.bind(this)}>Выйти</a>
 					</Col>
 				</Row>
 			</Header>
