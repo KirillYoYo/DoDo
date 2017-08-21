@@ -13,8 +13,8 @@ function getLogin (payload) {
 function getLogout () {
 	return Promise.resolve(	api.get('/logout') );
 }
-function getAllBanks () {
-	return Promise.resolve(	api.get('/banks') );
+function getAllUsers () {
+	return Promise.resolve(	api.get('/users') );
 }
 
 
@@ -44,12 +44,12 @@ export function* fetchLogout() {
 		yield put({type: 'LOGOUT_FAILED', error});
 	}
 }
-export function* fetchAllBanks() {
+export function* fetchAllUsers() {
 	try {
-		const menu = yield call(getAllBanks);
-		yield put({type: 'GET_ALL_BANKS_SUCCESS', payload: menu});
+		const users = yield call(getAllUsers);
+		yield put({type: 'GET_ALL_USERS_SUCCESS', payload: users});
 	} catch(error) {
-		yield put({type: 'GET_ALL_BANKS_FAILED', error});
+		yield put({type: 'GET_ALL_USERS_FAILED', error});
 	}
 }
 
@@ -63,8 +63,8 @@ function* watchAllMenu() {
 function* watchLogout() {
 	yield takeEvery("LOGOUT", fetchLogout);
 }
-function* watchAllBanks() {
-	yield takeEvery("GET_ALL_BANKS", fetchAllBanks);
+function* watchAllUsers() {
+	yield takeEvery("GET_ALL_USERS", fetchAllUsers);
 }
 
 export default function* rootSaga() {
@@ -72,6 +72,6 @@ export default function* rootSaga() {
 		watchAllMenu(),
 		watchLogout(),
 		watchLogin(),
-		watchAllBanks(),
+		watchAllUsers(),
 	])
 }

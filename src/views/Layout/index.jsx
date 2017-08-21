@@ -4,16 +4,13 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Layout, Affix, Row, Col} from 'antd';
 import {Route, Redirect} from 'react-router-dom';
-import AddTransaction from '../AddTransaction';
-import Table from '../Table';
+import About from '../About';
+import Main from '../Main';
 import {withRouter} from 'react-router-dom';
 
 
 import {childRoutes} from '@/route'
-
-import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
-
 import {logout} from '../../actions/auth';
 
 import './index.sass';
@@ -51,14 +48,11 @@ class App extends React.Component {
 			<Layout className="ant-layout-has-sider">
 				<Sidebar />
 				<Layout>
-					<Header profile={auth} logout={actions.logout}/>
 					<Content style={{margin: '0 16px'}}>
 						<div style={{minHeight: 360}}>
-							<Route path="/main" render={() => (
-								<h3>main</h3>
-							)}/>
-							<Route path="/main/table" component={Table}/>
-							<Route path="/main/addTransaction" component={AddTransaction}/>
+							<Route path="/main" />
+							<Route path="/main/main" component={Main}/>
+							<Route path="/main/about" component={About}/>
 						</div>
 					</Content>
 				</Layout>

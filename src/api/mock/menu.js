@@ -2,15 +2,15 @@ module.exports = {
 	menus: [
 		{
 			key: 6,
-			name: 'Добавить транзакцию',
+			name: 'Main',
 			icon: 'home',
-			url: '/main/addTransaction'
+			url: '/main/main'
 		},
 		{
 			key: 7,
-			name: 'Таблица транзакций',
+			name: 'About',
 			icon: 'home',
-			url: '/main/table'
+			url: '/main/about'
 		},
 	]
 }
