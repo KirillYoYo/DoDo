@@ -3,14 +3,14 @@ import auth from './auth';
 import menu from './menu';
 import transactions from './addTransaction';
 import banks from './banks';
-import users from './Main';
+import goods from './goods';
 
 const rootReducer = combineReducers({
 	auth,
 	menu,
 	transactions,
 	banks,
-	users
+	goods
 });
 
 export default rootReducer;

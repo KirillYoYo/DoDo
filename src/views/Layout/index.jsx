@@ -4,8 +4,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Layout, Affix, Row, Col} from 'antd';
 import {Route, Redirect} from 'react-router-dom';
-import About from '../About';
-import Main from '../Main';
+import Basket from '../Basket';
+import Goods from '../Goods';
 import {withRouter} from 'react-router-dom';
 
 
@@ -42,8 +42,6 @@ class App extends React.Component {
 	}
 
 	render() {
-		const {auth, actions} = this.props;
-
 		return (
 			<Layout className="ant-layout-has-sider">
 				<Sidebar />
@@ -51,8 +49,8 @@ class App extends React.Component {
 					<Content style={{margin: '0 16px'}}>
 						<div style={{minHeight: 360}}>
 							<Route path="/main" />
-							<Route path="/main/main" component={Main}/>
-							<Route path="/main/about" component={About}/>
+							<Route path="/main/goods" component={Goods}/>
+							<Route path="/main/basket" component={Basket}/>
 						</div>
 					</Content>
 				</Layout>

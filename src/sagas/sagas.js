@@ -13,8 +13,15 @@ function getLogin (payload) {
 function getLogout () {
 	return Promise.resolve(	api.get('/logout') );
 }
-function getAllUsers () {
-	return Promise.resolve(	api.get('/users') );
+export function getAllGoods () {
+	return Promise.resolve(	api.get('/goods') );
+}
+
+export function AddToBasket () {
+	return 'ADD_TO_BASKET_SUCCESS'
+}
+export function DeleteFromBasket () {
+	return 'DELETE_FROM_BASKET_SUCCESS'
 }
 
 
@@ -44,14 +51,25 @@ export function* fetchLogout() {
 		yield put({type: 'LOGOUT_FAILED', error});
 	}
 }
-export function* fetchAllUsers() {
+export function* fetchAllGoods() {
 	try {
-		const users = yield call(getAllUsers);
-		yield put({type: 'GET_ALL_USERS_SUCCESS', payload: users});
+		//const goods = yield call(getAllGoods);
+		yield put({type: 'GET_ALL_GOODS_SUCCESS', payload: yield call(getAllGoods)});
 	} catch(error) {
-		yield put({type: 'GET_ALL_USERS_FAILED', error});
+		yield put({type: 'GET_ALL_GOODS_FAILED', error});
 	}
 }
+export function * fetchAddToBasket (action) {
+	yield put({type: 'ADD_TO_BASKET_SUCCESS', payload: action.payload});
+}
+export function * fetchDeleteFromBasket (action) {
+	yield put({type: 'DELETE_FROM_BASKET_SUCCESS', payload: action.payload});
+}
+export function * fetchUpdateBasket (action) {
+	yield put({type: 'UPDATE_BASKET_SUCCESS', payload: action.payload});
+}
+
+
 
 /*watches*/
 function* watchLogin() {
@@ -63,8 +81,17 @@ function* watchAllMenu() {
 function* watchLogout() {
 	yield takeEvery("LOGOUT", fetchLogout);
 }
-function* watchAllUsers() {
-	yield takeEvery("GET_ALL_USERS", fetchAllUsers);
+function* watchAllGoods() {
+	yield takeEvery("GET_ALL_GOODS", fetchAllGoods);
+}
+function* watchAddToBasket() {
+	yield takeEvery("ADD_TO_BASKET", fetchAddToBasket);
+}
+function* watchDeleteFromBasket() {
+	yield takeEvery("DELETE_FROM_BASKET", fetchDeleteFromBasket);
+}
+function* watchUpdateBasket() {
+	yield takeEvery("UPDATE_BASKET", fetchUpdateBasket);
 }
 
 export default function* rootSaga() {
@@ -72,6 +99,9 @@ export default function* rootSaga() {
 		watchAllMenu(),
 		watchLogout(),
 		watchLogin(),
-		watchAllUsers(),
+		watchAllGoods(),
+		watchAddToBasket(),
+		watchDeleteFromBasket(),
+		watchUpdateBasket(),
 	])
 }

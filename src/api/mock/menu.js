@@ -2,15 +2,15 @@ module.exports = {
 	menus: [
 		{
 			key: 6,
-			name: 'Main',
+			name: 'Goods',
 			icon: 'home',
-			url: '/main/main'
+			url: '/main/goods'
 		},
 		{
 			key: 7,
-			name: 'About',
+			name: 'Basket',
 			icon: 'home',
-			url: '/main/about'
+			url: '/main/basket'
 		},
 	]
 }

@@ -18,7 +18,7 @@ mock.onPut('/login').reply(config => {
 mock.onGet('/logout').reply(200, {});
 mock.onGet('/my').reply(200, require('./mock/user'));
 mock.onGet('/menu').reply(200, require('./mock/menu'));
-mock.onGet('/users').reply(200, require('./mock/users'));
+mock.onGet('/goods').reply(200, require('./mock/goods'));
 
 
 mock.onGet('/banks').reply(200, require('./mock/banks'));
