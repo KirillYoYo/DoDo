@@ -28,8 +28,10 @@ class App extends React.Component {
 		}
 	}
 
-	shouldComponentUpdate  () {
-		return !localStorage.getItem('uid')
+	shouldComponentUpdate (nextProps) {
+		console.log(nextProps)
+		return !localStorage.getItem('uid') ||
+		nextProps.location !== this.props.locations
 	}
 
 	componentWillReceiveProps(nextProps) {

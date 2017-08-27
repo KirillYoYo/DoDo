@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Route, Switch } from 'react-router-dom';
 
-import Layout from '../views/Layout';
+import Layout from '../views/Layout/index';
 import Login from '../views/Login';
 import Register from '../views/Register';
 import Home from '@/views/Home';
