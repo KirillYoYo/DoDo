@@ -29,7 +29,6 @@ class App extends React.Component {
 	}
 
 	shouldComponentUpdate (nextProps) {
-		console.log(nextProps)
 		return !localStorage.getItem('uid') ||
 		nextProps.location !== this.props.locations
 	}
