@@ -9,7 +9,7 @@ import rootSaga from './sagas/sagas'
 import './index.sass';
 import Root from './envs/Root';
 
-const store = configureStore();
+const store = configureStore;
 store.runSaga(rootSaga)
 
 render(
@@ -26,19 +26,17 @@ render(
 );
 
 if (module.hot) {
-	module.hot.accept('./envs/Root', () => {
-		const RootContainer = require('./envs/Root');
-		render(
-			<LocaleProvider locale={enUS}>
-				<BrowserRouter>
+	module.hot.accept();
+	render(
+		<LocaleProvider locale={enUS}>
+			<BrowserRouter>
 				<AppContainer>
-					<RootContainer
+					<Root
 						store={ store }
 					/>
 				</AppContainer>
-				</BrowserRouter>
-			</LocaleProvider>,
-			document.getElementById('root')
-		);
-	});
+			</BrowserRouter>
+		</LocaleProvider>,
+		document.getElementById('root')
+	);
 }

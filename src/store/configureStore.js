@@ -45,8 +45,11 @@ import createSagaMiddleware, { END } from 'redux-saga'
 import rootReducer from '../reducers'
 
 
+let m_store = null;
 
-export default function configureStore(initialState) {
+
+export  function configureStore(initialState) {
+	console.log('configureStore !!!!!!!!!!!')
 	const sagaMiddleware = createSagaMiddleware()
 
 	const persistState = require('redux-devtools').persistState;
@@ -89,8 +92,19 @@ export default function configureStore(initialState) {
 		}
 	}
 
+	if (module.hot) {
+		module.hot.accept('../reducers', () => {
+			const nextRootReducer = require('../reducers/index');
+			store.replaceReducer(nextRootReducer);
+		});
+	}
+
 
 	store.runSaga = sagaMiddleware.run
 	store.close = () => store.dispatch(END)
-	return store
+	m_store = store
 }
+
+configureStore()
+
+export default m_store
